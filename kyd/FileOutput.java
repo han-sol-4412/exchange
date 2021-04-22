@@ -29,23 +29,23 @@ public class FileOutput {
 		}
 	}
 	
-	public void dataWrite(int choice, int input, int exchange_moneyInt, int wonChange) throws IOException{ //데이터 쓰기
+	public void dataWrite(Variable val) throws IOException{ //데이터 쓰기
 		
 		SimpleDateFormat sdt = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss"); 
 		Calendar calt = Calendar.getInstance(); 
 		
 		String choiceM="";
-		if(choice==1) {
+		if(val.choice==1) {
 			choiceM="USD";
-		} else if(choice==2) {
+		} else if(val.choice==2) {
 			choiceM="EUR";
-		} else if(choice==3){
+		} else if(val.choice==3){
 			choiceM="JPY";
 		} else {
 			choiceM="USD";
 		}
 		
-		String s = sdt.format(calt.getTime())+","+choiceM+","+input+","+exchange_moneyInt+","+wonChange+"\n";
+		String s = sdt.format(calt.getTime())+","+choiceM+","+val.input+","+val.exchange_moneyInt+","+val.wonChange+"\n";
 		writer.write(s);	
 	}
 	

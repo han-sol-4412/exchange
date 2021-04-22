@@ -9,25 +9,27 @@ public class Main {
 		Input in = new Input();
 		Rate rateSelect = new Rate();
 		Calculator cal = new Calculator();
-		FileOutput fw = new FileOutput();
+		File f = new File();
+		Variable val;
 		
 		int choice;
 		int input ;
-		do {
+		while(true){
 				input = in.getInput();
+				if(input == ConstValue.EX_TYPE_EXIT) break;
 				choice = in.getChice();
-				
 				double rate = rateSelect.rate(choice) ;
 				
 				int exchange_moneyInt = cal.getExchange_moneyInt(input, rate);
 				int wonChange = cal.getWonChange(input, rate, exchange_moneyInt);
-				cal.exchange(choice, exchange_moneyInt);
-				cal.change(wonChange);
-				fw.headerWrite();
-				fw.dataWrite(choice, input, exchange_moneyInt, wonChange);
 				
-		}while(input != ConstValue.EX_TYPE_EXIT);
-		fw.fileClose();
+				val = new Variable(choice,input,exchange_moneyInt,wonChange);
+				
+				cal.exchange(val.choice, val.exchange_moneyInt);
+				cal.change(val.wonChange);
+				f.fileWriter(val);
+		}
+		
 	}
 }
 
